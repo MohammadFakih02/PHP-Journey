@@ -6,6 +6,14 @@ $data = json_decode($input, true);
 
 if(isset($data['array'])){
     $array = $data['array'];
+    $result = mergesort($array);
+    echo json_encode($result);
+}else{
+    http_response_code(400);
+    echo json_encode([
+        'success'=> false,
+        'message'=> 'Input an array'
+    ]);
 }
 function merge($left,$right){
     $res = [];
@@ -29,7 +37,7 @@ function merge($left,$right){
         $result[] = $right[$j];
         $j++;
     }
-    
+
     return $result;
 }
 
